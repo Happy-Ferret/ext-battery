@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "Battery Test",
+    "description": "Test the Battery experiment",
+    "version": "1.0",
+    "permissions": [
+      "experiments.battery"
+    ],
+    "browser_action": {
+      "browser_style": true,
+      "theme_icons": [{
+        "light": "icons/battery.png",
+        "dark": "icons/battery-light.png",
+        "size": 16
+      }],
+      "default_popup": "popup.html"
+    },
+    "applications": {
+      "gecko": {
+        "id": "battery@happy-ferret.com",
+        "strict_min_version": "42.0"
+      }
+    }
+  }

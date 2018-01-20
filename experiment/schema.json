@@ -1,0 +1,39 @@
+[
+  {
+    "namespace": "battery",
+    "description": "browser.battery",
+    "permissions": [
+      "experiments.battery"
+    ],
+    "functions": [
+      {
+        "name": "getLevel",
+        "type": "function",
+        "description": "Gets Battery level",
+        "async": true,
+        "parameters": []
+      },
+      {
+        "name": "getStatus",
+        "type": "function",
+        "description": "Gets charging status",
+        "async": true,
+        "parameters": []
+      },
+      {
+        "name": "getTime",
+        "type": "function",
+        "description": "Gets charging time",
+        "async": true,
+        "parameters": []
+      },
+      {
+        "name": "getTimeLeft",
+        "type": "function",
+        "description": "Gets Discharging time",
+        "async": true,
+        "parameters": []
+      }
+    ]
+  }
+]
