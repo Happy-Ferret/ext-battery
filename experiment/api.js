@@ -1,5 +1,6 @@
 "use strict";
 const { classes: Cc, interfaces: Ci, results: Cr, utils: Cu } = Components;
+const { EventManager} = Cu.import("resource://gre/modules/ExtensionCommon.jsm");
 
 const wm = Cc["@mozilla.org/appshell/window-mediator;1"]
   .getService(Ci.nsIWindowMediator);
@@ -24,18 +25,80 @@ class API extends ExtensionAPI {
     return {
       battery: {
 
+        onStatusChanged: new EventManager(context, "battery.onStatusChanged", fire => {
+          var batteryLevel = browserWindow.navigator.getBattery().then(function (battery) {
+            let handler = battery.addEventListener('chargingchange', (event) => {
+              console.log(battery.charging);
+              fire.async();
+              return event;
+            });
+          })
+          return () => {
+            browserWindow.removeEventListener('chargingchange', (event) => {
+              console.log("Removed");
+            })
+          };
+        }).api(),
+
+        onLevelChanged: new EventManager(context, "battery.onLevelChanged", fire => {
+          var batteryLevel = browserWindow.navigator.getBattery().then(function (battery) {
+            let handler = battery.addEventListener('levelchange', (event) => {
+              console.log(battery.level);
+              fire.async();
+              return event;
+            });
+          })
+          return () => {
+            browserWindow.removeEventListener('levelchange', (event) => {
+              console.log("Removed");
+            })
+          };
+        }).api(),
+
+        onChargeChanged: new EventManager(context, "battery.onChargeChanged", fire => {
+          var batteryLevel = browserWindow.navigator.getBattery().then(function (battery) {
+            let handler = battery.addEventListener('chargingtimechange', (event) => {
+              console.log(battery.chargingTime);
+              fire.async();
+              return event;
+            });
+          })
+          return () => {
+            browserWindow.removeEventListener('chargingtimechange', (event) => {
+              console.log("Removed");
+            })
+          };
+        }).api(),
+
+        onDischargeChanged: new EventManager(context, "battery.onDischargeChanged", fire => {
+          var batteryLevel = browserWindow.navigator.getBattery().then(function (battery) {
+            let handler = battery.addEventListener('dischargingtimechange', (event) => {
+              console.log(battery.dischargingTime);
+              fire.async();
+              return event;
+            });
+          })
+          return () => {
+            browserWindow.removeEventListener('dischargingtimechange', (event) => {
+              console.log("Removed");
+            })
+          };
+        }).api(),
+
         async getLevel() {
           var batteryLevel = browserWindow.navigator.getBattery().then(function (battery) {
             return (battery.level * 100).toFixed(2);
           });
           return batteryLevel;
         },
+
         async getStatus() {
           var batteryStatus = browserWindow.navigator.getBattery().then(function (battery) {
             return battery.charging ? "Plugged-in/charging" : "Running on battery"
           });
           return batteryStatus;
         },
+
         async getTime() {
           var batteryTime = browserWindow.navigator.getBattery().then(function (battery) {
             if (battery.charging
@@ -51,6 +114,7 @@ class API extends ExtensionAPI {
           });
           return batteryTime;
         },
+
         async getTimeLeft() {
           var batteryTime = browserWindow.navigator.getBattery().then(function (battery) {
             if (!battery.charging

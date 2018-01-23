@@ -34,6 +34,56 @@
         "async": true,
         "parameters": []
       }
+    ],
+    "events": [
+      {
+        "name": "onStatusChanged",
+        "description": "Fired when the charging status changed.",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "param1",
+            "description": "Description of the first callback parameter",
+            "type": "boolean"
+          }
+        ]
+      },
+      {
+        "name": "onLevelChanged",
+        "description": "Fired when the battery level changed.",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "param1",
+            "description": "Description of the first callback parameter",
+            "type": "boolean"
+          }
+        ]
+      },
+      {
+        "name": "onChargeChanged",
+        "description": "Fired when the charging time changed.",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "param1",
+            "description": "Description of the first callback parameter",
+            "type": "boolean"
+          }
+        ]
+      },
+      {
+        "name": "onDischargeChanged",
+        "description": "Fired when the charging time changed.",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "param1",
+            "description": "Description of the first callback parameter",
+            "type": "boolean"
+          }
+        ]
+      }
     ]
   }
 ]

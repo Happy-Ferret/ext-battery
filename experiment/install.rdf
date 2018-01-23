@@ -6,7 +6,7 @@
                em:id="battery@experiments.addons.mozilla.org"
                em:name="Experimental Battery API"
                em:type="256"
-               em:version="0.1"
+               em:version="0.2"
                em:description="Battery API"
                em:creator="Happy-Ferret">
     
